@@ -252,7 +252,7 @@ class Farm:
         #if self.is_done():
         # print(playercolor + " player's score is " + str(relevantplayer['score']) + " and energy is " + str(relevantplayer['energy']))
         relevantplayer["bonuspoints"] = (
-            relevantplayer["score"] * relevantplayer["energy"]
+            relevantplayer['score']*relevantplayer['energy']+(len(relevantplayer['backpack']['contents'])*40)
         )
         # otherplayer.bonuspoints = otherplayer.score * otherplayer.energy
         reward = relevantplayer["bonuspoints"]
