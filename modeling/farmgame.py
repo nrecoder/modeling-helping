@@ -248,13 +248,14 @@ class Farm:
         # currentplayer = state.players[state.turn]
         reward = 0
         # is the game over? set done to true, give bonus points
-        if self.is_done():
-            # print(playercolor + " player's score is " + str(relevantplayer['score']) + " and energy is " + str(relevantplayer['energy']))
-            relevantplayer["bonuspoints"] = (
-                relevantplayer["score"] * relevantplayer["energy"]
-            )
-            # otherplayer.bonuspoints = otherplayer.score * otherplayer.energy
-            reward = relevantplayer["bonuspoints"]
+        #TASHA EDIT REMOVED IF SELF DONE
+        #if self.is_done():
+        # print(playercolor + " player's score is " + str(relevantplayer['score']) + " and energy is " + str(relevantplayer['energy']))
+        relevantplayer["bonuspoints"] = (
+            relevantplayer["score"] * relevantplayer["energy"]
+        )
+        # otherplayer.bonuspoints = otherplayer.score * otherplayer.energy
+        reward = relevantplayer["bonuspoints"]
         # else:
         #     reward = relevantplayer.score #just how many items they have delivered as they go along
 
