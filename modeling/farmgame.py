@@ -21,6 +21,7 @@ class Action():
         self.color = color
         self.loc = loc
         self.id = id
+
     
     def get_target(self) -> str:
         if self.type == ActionType.veggie:
@@ -67,6 +68,8 @@ class Farm:
 
     # NOTE: anything you add to init, must be added to config in deep_copy method to ensure entire state info is copied
     def __init__(self, config):
+        #print(config)
+        self.energy_reward = config.get("energyreward")
         self.redplayer = self.create_player(
             config.get("redplayer")
         )  # Player({'name':'red','x':2, 'y':15,'backpack':Backpack()})
@@ -251,10 +254,23 @@ class Farm:
         #TASHA EDIT REMOVED IF SELF DONE
         #if self.is_done():
         # print(playercolor + " player's score is " + str(relevantplayer['score']) + " and energy is " + str(relevantplayer['energy']))
+        own_fruit = 0
+        # for i in range(len(relevantplayer['backpack']['contents'])):
+        #     if relevantplayer['backpack']['contents'][i].color == playercolor:
+        #         own_fruit += 1
+        # print("own_fruit " + str(own_fruit))
+        # if self.energy_reward == True:
+        #     relevantplayer["bonuspoints"] = (
+        #         (relevantplayer['score']*relevantplayer['energy'])+(own_fruit*40)
+        #     )
+        # elif self.energy_reward == False: 
+        #     relevantplayer["bonuspoints"] = (
+        #         relevantplayer['score']+(own_fruit*0.5)
+        #    )
+        # otherplayer.bonuspoints = otherplayer.score * otherplayer.energy
         relevantplayer["bonuspoints"] = (
             (relevantplayer['score']*relevantplayer['energy'])+(len(relevantplayer['backpack']['contents'])*40)
         )
-        # otherplayer.bonuspoints = otherplayer.score * otherplayer.energy
         reward = relevantplayer["bonuspoints"]
         # else:
         #     reward = relevantplayer.score #just how many items they have delivered as they go along
@@ -378,6 +394,7 @@ class Farm:
             state.stepcost,
             state.pillowcost,
             state.turn,
+            state.energyreward
         ]
 
         for i in range(len(props)):
@@ -395,9 +412,9 @@ class Farm:
             "stepcost": tupstate[5],
             "pillowcost": tupstate[6],
             "turn": tupstate[7],
+            "energyreward": tupstate[8]
         }
         # config = demutify_dict(tupstate)
-        # print(config)
         return Farm(config)
 
     # def __str__(self):
@@ -508,6 +525,7 @@ def configure_game(
     costCond="low",
     visibilityCond="full",
     redFirst=True,
+    energyreward=True
 ):
     itemlayer = layer
     condition = {
@@ -542,6 +560,7 @@ def configure_game(
         "stepcost": 1 if condition["costCond"] == "low" else 2,
         "pillowcost": 5,  # If pillow cost ever changes, this would have to be adjustable, but i don't plan on changing it rn
         "condition": condition,
+        "energyreward": energyreward
     }
 
     return Farm(config)
