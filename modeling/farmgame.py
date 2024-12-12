@@ -550,11 +550,11 @@ def configure_game(
     config = {
         "redplayer": {
             "name": "red",
-            "loc": {"x": 2, "y": 15},
+            "loc": {"x": 1, "y": 1},
             "capacity": rbp,
             "contents": [],
         },
-        "purpleplayer": {"name": "purple", "loc": {"x": 3, "y": 16}, "capacity": pbp},
+        "purpleplayer": {"name": "purple", "loc": {"x": 4, "y": 4}, "capacity": pbp},
         "redfirst": redFirst,  # if random.random()<0.5 else False,
         "items": layer,
         "stepcost": 1 if condition["costCond"] == "low" else 2,
