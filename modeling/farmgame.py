@@ -94,7 +94,7 @@ class Farm:
             self.items = temp
         box_config = config.get("farmbox", {})
         self.farmbox = self.create_farmbox(
-            box_config.get("loc", {"x": 16, "y": 5}),
+            box_config.get("loc", {"x": 2, "y": 2}),
             box_config.get("boxcontents", [])
         )  # default starts as empty box
         self.stepcost = config.get(
